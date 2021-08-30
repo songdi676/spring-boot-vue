@@ -3,7 +3,7 @@
     <h1>{{ msg }}</h1>
    
       Name:
-      <input type="text" name="name" :value="youname"><br>
+      <input type="text" v-model="youname" name="name" ><br>
       <input type="submit" value="发送" @click="hello">
       <input type="reset" value="重置">
     
