@@ -10,5 +10,5 @@ ENV LC_ALL en_US.UTF-8
 ADD target/spring-boot-vue*.jar /usr/local/nldata
 RUN chown -R paasopt:paasopt /usr/local/nldata
 USER 2000
-ENTRYPOINT ["java","-jar /usr/local/nldata/spring-boot-vue*.jar"]
+ENTRYPOINT ["java","-jar","/usr/local/nldata/spring-boot-vue*.jar"]
 EXPOSE 8080
