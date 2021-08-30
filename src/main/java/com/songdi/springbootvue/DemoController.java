@@ -25,7 +25,7 @@ public class DemoController {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        logger.info("{0} hello {1}",address.getHostAddress() , objectId);
+        logger.info("{} hello {}",address.getHostAddress() , objectId);
 
         return address.getHostAddress() + " Hello " + objectId;
 
