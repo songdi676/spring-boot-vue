@@ -18,13 +18,15 @@ public class DemoController {
 
     @GetMapping(value = "/hello/{objectId}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public String hello(@PathVariable("objectId") String objectId) {
-        logger.debug("hello {0}", objectId);
+
         InetAddress address = null;
         try {
             address = InetAddress.getLocalHost();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+        logger.debug("{0} hello {1}",address.getHostAddress() , objectId);
+
         return address.getHostAddress() + " Hello " + objectId;
 
     }
