@@ -23,7 +23,7 @@ export default {
     hello() {
       axios
           .get('/v1/demo/hello/'+this.youname)
-          .then(response => (this.msg = response))
+          .then(response => (this.msg = response.data))
     },
   }
 }
