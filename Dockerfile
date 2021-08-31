@@ -3,7 +3,7 @@ RUN groupadd paasopt
 RUN useradd -g paasopt -m paasopt -u 2000
 
 ADD Dockerfile /
-RUN mkdir /usr/local/nldata/logs
+RUN mkdir -p /usr/local/nldata/logs
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
