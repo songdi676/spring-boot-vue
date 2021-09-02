@@ -25,9 +25,27 @@ public class DemoController {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        logger.info("{} hello {}",address.getHostAddress() , objectId);
+        logger.info("{} hello {}", address.getHostAddress(), objectId);
 
-        return address.getHostAddress() + " Hello " + objectId+ " v2 \n";
+        return address.getHostAddress() + " Hello " + objectId + " v2 \n";
+
+    }
+
+    @GetMapping(value = "/fusing/{objectId}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public String fusing(@PathVariable("objectId") Integer objectId) {
+
+        InetAddress address = null;
+        try {
+            address = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        logger.info("{} hello {}", address.getHostAddress(), objectId);
+
+        if (objectId % 2 == 0) {
+            throw new RuntimeException("异常");
+        }
+        return address.getHostAddress() + " Hello World " + objectId + " v2 \n";
 
     }
 }
