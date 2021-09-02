@@ -27,7 +27,7 @@ public class DemoController {
         }
         logger.info("{} hello {}", address.getHostAddress(), objectId);
 
-        return address.getHostAddress() + " Hello " + objectId + " v2 \n";
+        return address.getHostAddress() + " Hello " + objectId + " v1 \n";
 
     }
 
@@ -45,7 +45,7 @@ public class DemoController {
         if (objectId % 2 == 0) {
             throw new RuntimeException("异常");
         }
-        return address.getHostAddress() + "Fusing Hello World " + objectId + " v2 \n";
+        return address.getHostAddress() + "Fusing Hello World " + objectId + " v1 \n";
 
     }
 
@@ -61,7 +61,7 @@ public class DemoController {
         logger.info("{} hello {}", address.getHostAddress(), objectId);
 
         Thread.sleep(objectId * 20);
-        return address.getHostAddress() + "Delayed Hello World " + objectId + " v2 \n";
+        return address.getHostAddress() + "Delayed Hello World " + objectId + " v1 \n";
 
     }
 }
