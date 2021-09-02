@@ -27,7 +27,7 @@ public class DemoController {
         }
         logger.info("{} hello {}",address.getHostAddress() , objectId);
 
-        return address.getHostAddress() + " Hello " + objectId+ " v1 \n";
+        return address.getHostAddress() + " Hello " + objectId+ " v2 \n";
 
     }
 }
