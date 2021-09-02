@@ -48,4 +48,20 @@ public class DemoController {
         return address.getHostAddress() + " Hello World " + objectId + " v2 \n";
 
     }
+
+    @GetMapping(value = "/delayed/{objectId}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public String delayed(@PathVariable("objectId") Integer objectId) throws InterruptedException {
+
+        InetAddress address = null;
+        try {
+            address = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        logger.info("{} hello {}", address.getHostAddress(), objectId);
+
+        Thread.sleep(objectId * 20);
+        return address.getHostAddress() + " Hello World " + objectId + " v2 \n";
+
+    }
 }
