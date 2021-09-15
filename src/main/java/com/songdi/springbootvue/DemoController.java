@@ -64,4 +64,22 @@ public class DemoController {
         return address.getHostAddress() + "Delayed Hello World " + objectId + " v1 \n";
 
     }
+
+    @GetMapping(value = "/cpu/{useRatio}/{busyTime}/{duration}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public String cpuUseRatio(@PathVariable("useRatio") Integer useRatio, @PathVariable("busyTime") Integer busyTime,
+        @PathVariable("duration") Integer duration) throws InterruptedException {
+
+        int idelTime = busyTime; // 50%的占有率
+        long startTime = System.currentTimeMillis();
+        long runTime = 0;
+        while (true && System.currentTimeMillis() - startTime < duration) {
+            runTime = System.currentTimeMillis();
+            while (System.currentTimeMillis() - runTime < busyTime)
+                ;
+            Thread.sleep(idelTime);
+        }
+
+        return "cpuUseRatio Hello World \n";
+
+    }
 }
