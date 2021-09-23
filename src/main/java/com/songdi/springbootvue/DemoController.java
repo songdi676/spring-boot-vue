@@ -2,12 +2,15 @@ package com.songdi.springbootvue;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -65,10 +68,9 @@ public class DemoController {
 
     }
 
-    @GetMapping(value = "/cpu/{useRatio}/{busyTime}/{duration}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public String cpuUseRatio(@PathVariable("useRatio") Integer useRatio, @PathVariable("busyTime") Integer busyTime,
-        @PathVariable("duration") Integer duration) throws InterruptedException {
-
+    @GetMapping(value = "/cpu/{duration}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public String cpuUseRatio(@PathVariable("duration") Integer duration) throws InterruptedException {
+        int busyTime = 199;
         int idelTime = 200 - busyTime; // 50%的占有率
         long startTime = System.currentTimeMillis();
         long runTime = 0;
@@ -80,6 +82,13 @@ public class DemoController {
         }
 
         return "cpuUseRatio Hello World \n";
+
+    }
+
+    @PostMapping(value = "/echo", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public Map<String, String> postEcho(@RequestBody Map<String, String> stringMap) {
+
+        return stringMap;
 
     }
 }
