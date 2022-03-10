@@ -2,7 +2,10 @@ package com.songdi.springbootvue;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -86,9 +90,14 @@ public class DemoController {
     }
 
     @PostMapping(value = "/echo", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public Map<String, String> postEcho(@RequestBody Map<String, String> stringMap) {
+    public Map<String, Object> postEcho(@RequestBody Map<String, String> stringMap,
+        @RequestHeader Map<String, String> headers) {
 
-        return stringMap;
+        Map<String, Object> res = new HashMap<>();
+
+        res.put("RequestBody", res);
+        res.put("headers", headers);
+        return res;
 
     }
 }
