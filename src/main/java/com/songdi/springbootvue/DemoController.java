@@ -95,7 +95,7 @@ public class DemoController {
 
         Map<String, Object> res = new HashMap<>();
 
-        res.put("RequestBody", res);
+        res.put("RequestBody", stringMap);
         res.put("headers", headers);
         return res;
 
