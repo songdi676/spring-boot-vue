@@ -5,10 +5,14 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +26,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/v1/demo")
 public class DemoController {
     private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
+    @Autowired
+    MeterRegistry registry;
+    private Counter counter_core;
+    private Counter counter_index;
+
+    @PostConstruct
+    private void init() {
+        counter_core = registry.counter("business_requests_method_count", "method", "create user");
+        counter_index = registry.counter("business_requests_method_count", "method", "query the bill");
+    }
+
+    @GetMapping(value = "/query-bill/{objectId}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public String bill(@PathVariable("objectId") Integer objectId) {
+        counter_index.increment();
+        return "bill";
+    }
+
+    @GetMapping(value = "/createUser/{objectId}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public String createUser(@PathVariable("objectId") Integer objectId) {
+        counter_core.increment();
+        return "createUser";
+    }
 
     @GetMapping(value = "/hello/{objectId}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public String hello(@PathVariable("objectId") String objectId) {
