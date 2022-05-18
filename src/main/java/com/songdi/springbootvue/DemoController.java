@@ -100,6 +100,7 @@ public class DemoController {
 
     @GetMapping(value = "/cpu/{duration}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public String cpuUseRatio(@PathVariable("duration") Integer duration) throws InterruptedException {
+        logger.info("{} cpu {}", "", duration);
         int busyTime = 199;
         int idelTime = 200 - busyTime; // 50%的占有率
         long startTime = System.currentTimeMillis();
