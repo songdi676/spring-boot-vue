@@ -10,7 +10,7 @@ ENV LC_ALL en_US.UTF-8
 ADD target/spring-boot-vue*.jar /usr/local/nldata/app.jar
 ADD log/*.log /usr/local/nldata/logs/
 RUN chown -R paasopt:paasopt /usr/local/nldata
-RUN chown -R paasopt:paasopt /usr/local/logs
+RUN chown -R paasopt:paasopt /usr/local/nldata/logs
 USER 2000
 WORKDIR /usr/local/nldata
 ENTRYPOINT ["java","-jar","/usr/local/nldata/app.jar"]
